@@ -11,10 +11,11 @@
 template <typename Iterator>
 Iterator compress(const std::string &uncompressed, Iterator result)
 {
+    int  const nums = 3500000; 
     // Build the dictionary.
-    int dictSize = 256;
+    int dictSize = nums;
     std::map<std::string, int> dictionary;
-    for (int i = 0; i < 256; i++)
+    for (int i = 0; i < nums; i++)
         dictionary[std::string(1, i)] = i;
 
     std::string w;
@@ -47,11 +48,12 @@ Iterator compress(const std::string &uncompressed, Iterator result)
  */
 template <typename Iterator>
 std::string decompress(Iterator begin, Iterator end)
-{
+{ 
+    int  const nums = 3500000;
     // Build the dictionary.
-    int dictSize = 256;
+    int dictSize = nums;
     std::map<int, std::string> dictionary;
-    for (int i = 0; i < 256; i++)
+    for (int i = 0; i < nums; i++)
         dictionary[i] = std::string(1, i);
 
     std::string w(1, *begin++);
@@ -81,7 +83,7 @@ int main()
 {
     //Test Case 1
     std::vector<int> compressed;
-    compress("Hello world !!", std::back_inserter(compressed));
+    compress("fGZXWjsVzTIGmDT0oO9PLuHVyTFleYNZ1MyhqwJzQgFz4jWdalfVqzcCRY3EauV8retqbJZvmhAyBpYCcebKr4W7xYquy9k4C4lFWQq2I3efCWPcQ6O8t94ApnjS2IZuPn2dGznHg982hKFybXUHsBbOhTF5NzNtqgbO0cyufCmS3YXzIIjLhiov4pND9X316Ptm8tV6uxT38o32LqyBiDkPoOHgJuvvQu3qmcd9OVyLaQM9hjOlASTsFY6AjJ2zhkhNRaaXHDA0Q0li9eSTZorr9svHL1WPmAR0DWjEBWhEsvhpoJSTRjJUp6SiMOODD5QPbb4bx08ieIszPBWhrdV8GowUI0QBAiz5Dh66Lr6xOPgL03Gzgzn5WjRSkKSyJGkDQrzQCNptvFxS8VDsogtbHiE7VyPVKaZjY9KWwU9qDSwLyP94RF0ZFsG0J74zxSI3OvhnSk9HkcwbuZFi6e1zrecW6HiztaxVTMwHZtTWLfgfNPlpjKikbuK5YD11VsqVdW6L2VvcqNp4yO9fTnWRNkNcU8dbxOv1982EHz9zdITUAQAI9GkLTBQ94puKrbeCNo0WExLz8sWNyXsIK40bKSq0pYvhxi4QYvEXR672f3iZ1YRkiBrHLrz4CXWclueH99P3MW4RdlUrFX7qFoewl8VXrTGU0oXYDaTp7Xy4DlQ7PP4GyBL1fdX3QEfW4Tr8EMht6Y6gV5pGjIeP7HSlro0RS295kMAkQmhEbmNfGW9oE2fGWHRAWvyDdJxlCtQebYHdZ9ioxxCvzKgRAgAFpxFR4Dj9DPcatLEpEOTK2eQesickeCxGXHOKpg7mnncXJXTcP2HS8P1bCQxbI2Rfvs9OV33txEQAoXj3tvWHGFeZvNhtuf3SlmWCJpk8z117GTBcjiI9kZGjhXfQjDwcxhElthP8sPxZ8F8HFcPCmPlFRKxIUxoqdsEbVvOkQUjZcQZQJVUNR9BeUvYQ1kEP0xZToj9Y3yDfCB0S", std::back_inserter(compressed));
     copy(compressed.begin(), compressed.end(), std::ostream_iterator<int>(std::cout, ", "));
     std::cout << std::endl;
     std::string decompressed = decompress(compressed.begin(), compressed.end());
